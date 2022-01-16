@@ -6,7 +6,7 @@
 /*   By: nthomas- <nthomas-@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 18:38:57 by nthomas-          #+#    #+#             */
-/*   Updated: 2022/01/05 15:54:39 by nthomas-         ###   ########.fr       */
+/*   Updated: 2022/01/16 11:19:11 by nthomas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ typedef struct s_game
 	int			state;
 }				t_game;
 
-typedef struct s_global
-{
-} t_global;
-
 void		clean_map(char **map);
 void		clean(t_game *game, void *ptr);
 void		parse_map(t_game *game, char *map_path);
@@ -72,5 +68,8 @@ void		init_images(t_game	*game);
 int			exit_game(t_game *game);
 void		parse_inner_map(t_game *game);
 void		draw_tile(t_game *g, int x, int y);
+void		init_mlx(t_game	*game);
+void		init_values(t_game *game);
+void		print_credits(void);
 
 #endif

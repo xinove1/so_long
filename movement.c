@@ -6,11 +6,26 @@
 /*   By: nthomas- <nthomas-@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 18:38:48 by nthomas-          #+#    #+#             */
-/*   Updated: 2022/01/05 22:49:57 by nthomas-         ###   ########.fr       */
+/*   Updated: 2022/01/15 13:28:47 by nthomas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	handle_keys(int code, t_game *game)
+{
+	if (code == KEY_A || code == KEY_LEFT)
+		move(game, (t_Vector2){-1, 0});
+	else if (code == KEY_D || code == KEY_RIGHT)
+		move(game, (t_Vector2){1, 0});
+	else if (code == KEY_W || code == KEY_UP)
+		move(game, (t_Vector2){0, -1});
+	else if (code == KEY_S || code == KEY_DOWN)
+		move(game, (t_Vector2){0, 1});
+	else if (code == KEY_ESC)
+		exit_game(game);
+	return (0);
+}
 
 void	move(t_game *game, t_Vector2 dir)
 {
@@ -35,6 +50,7 @@ void	move(t_game *game, t_Vector2 dir)
 		i++;
 	}
 	game->moves++;
+	game->state = -game->state;
 	printf("%d\n", game->moves);
 	new_pos++;
 	draw(game);

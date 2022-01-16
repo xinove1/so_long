@@ -6,7 +6,7 @@
 /*   By: nthomas- <nthomas-@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 18:39:03 by nthomas-          #+#    #+#             */
-/*   Updated: 2022/01/05 16:04:35 by nthomas-         ###   ########.fr       */
+/*   Updated: 2022/01/16 12:15:48 by nthomas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,48 @@ t_Vector2	add_vec2(t_Vector2 p1, t_Vector2 p2)
 	return (result);
 }
 
-void	print_map(t_game *game)
+void	init_values(t_game *game)
 {
-	int	i;
+	game->map = NULL;
+	game->players_p = NULL;
+	game->collected = 0;
+	game->collectables = 0;
+	game->players = 0;
+	game->state = 1;
+	game->moves = 0;
+}
 
-	i = 0;
-	while (game->map[i])
+void	print_credits(void)
+{
+	printf("===============================================\n\n");
+	printf("So Long by nthomas-\n");
+	printf("Art by kenney at kenney.nl\n");
+	printf("\n===============================================\n");
+}
+
+t_Vector2	get_map_size(char *path, t_game *game)
+{
+	int			fd;
+	t_Vector2	size;
+	char		*line;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		parser_error_handler(4, game, NULL);
+	line = get_next_line(fd);
+	if (!line)
+		parser_error_handler(3, game, line);
+	size.x = ft_strlen(line);
+	size.y = 0;
+	while (line)
 	{
-		printf("%s", game->map[i]);
-		i++;
+		if ((int)ft_strlen(line) != size.x)
+			parser_error_handler(1, game, line);
+		size.y++;
+		free(line);
+		line = get_next_line(fd);
 	}
-	printf("Players: %d | Collectables: %d \n", game->players, game->collectables);
-	printf("Map size: %d, %d \n", game->map_size.x, game->map_size.y);
-	printf("win size: %d, %d \n", game->win_size.x, game->win_size.y);
+	size.x--;
+	close(fd);
+	return (size);
 }

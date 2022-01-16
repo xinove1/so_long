@@ -6,7 +6,7 @@
 /*   By: nthomas- <nthomas-@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 18:38:00 by nthomas-          #+#    #+#             */
-/*   Updated: 2022/01/02 20:47:42 by nthomas-         ###   ########.fr       */
+/*   Updated: 2022/01/14 20:15:43 by nthomas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@ void	clean(t_game *game, void *ptr)
 
 int	exit_game(t_game *game)
 {
-	/* clean(game, NULL); */
-	game->collectables++;
+	int	i;
+
+	i = -1;
+	while (game->tiles[++i])
+		mlx_destroy_image(game->mlx_ptr, game->tiles[i]);
+	mlx_destroy_window(game->mlx_ptr, game->win);
+	mlx_destroy_display(game->mlx_ptr);
+	free(game->mlx_ptr);
+	clean(game, NULL);
 	exit(0);
 }
 

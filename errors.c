@@ -6,7 +6,7 @@
 /*   By: nthomas- <nthomas-@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 18:38:36 by nthomas-          #+#    #+#             */
-/*   Updated: 2022/01/05 10:32:05 by nthomas-         ###   ########.fr       */
+/*   Updated: 2022/01/16 12:16:26 by nthomas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	parser_error_handler(int error, t_game *game, void *ptr)
 	else if (error == 4)
 		perror("");
 	else if (error == 5)
-		printf("Map must have at least one exit, one collectible,\
-				and one starting position.\n");
+		printf("Map must have at least one exit, one collectible, "
+			"and one starting position.\n");
 	else if (error == 6)
 		ft_putstr_fd("Can't create a game without a map.", 2);
 	clean(game, ptr);
