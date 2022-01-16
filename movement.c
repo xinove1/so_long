@@ -6,7 +6,7 @@
 /*   By: nthomas- <nthomas-@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 18:38:48 by nthomas-          #+#    #+#             */
-/*   Updated: 2022/01/15 13:28:47 by nthomas-         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:33:37 by nthomas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	move(t_game *game, t_Vector2 dir)
 		if (new_pos == '0')
 			change_player_pos(game, i, dir);
 		else if (new_pos == 'E' && game->collected == game->collectables)
-			printf("Game Won\n");
+			exit_game(game);
 		else if (new_pos == 'C')
 		{
 			change_player_pos(game, i, dir);
@@ -51,7 +51,6 @@ void	move(t_game *game, t_Vector2 dir)
 	}
 	game->moves++;
 	game->state = -game->state;
-	printf("%d\n", game->moves);
 	new_pos++;
 	draw(game);
 }
