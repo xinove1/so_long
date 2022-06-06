@@ -28,16 +28,16 @@ void	init_values(t_game *game)
 	game->collected = 0;
 	game->collectables = 0;
 	game->players = 0;
-	game->state = 1;
+	game->player_state = 1;
 	game->moves = 0;
 }
 
 void	print_credits(void)
 {
-	printf("===============================================\n\n");
-	printf("So Long by nthomas-\n");
-	printf("Art by kenney at kenney.nl\n");
-	printf("\n===============================================\n");
+	ft_printf("===============================================\n\n");
+	ft_printf("So Long by nthomas-\n");
+	ft_printf("Art by kenney at kenney.nl\n");
+	ft_printf("\n===============================================\n");
 }
 
 t_Vector2	get_map_size(char *path, t_game *game)
@@ -57,12 +57,14 @@ t_Vector2	get_map_size(char *path, t_game *game)
 	while (line)
 	{
 		if ((int)ft_strlen(line) != size.x)
-			parser_error_handler(1, game, line);
+			size.y = -42424242;
 		size.y++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	size.x--;
 	close(fd);
+	if (size.y < 0)
+		parser_error_handler(1, game, NULL);
+	size.x--;
 	return (size);
 }

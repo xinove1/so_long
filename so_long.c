@@ -16,9 +16,11 @@ int	main(int argc, const char *argv[])
 {
 	t_game	game;
 
+	init_values(&game);
 	if (argc < 2)
 		parser_error_handler(6, &game, NULL);
-	init_values(&game);
+	else if (argc > 2)
+		parser_error_handler(7, &game, NULL);
 	parse_map(&game, (char *)argv[1]);
 	print_credits();
 	init_mlx(&game);
@@ -29,7 +31,7 @@ int	draw(t_game *g)
 {
 	int		y;
 	int		x;
-	char	*c;
+	char	*moves;
 
 	y = 0;
 	while (y < g->map_size.y)
@@ -42,9 +44,9 @@ int	draw(t_game *g)
 		}
 		y++;
 	}
-	c = ft_itoa(g->moves);
-	mlx_string_put(g->mlx_ptr, g->win, 3, 11, 255, c);
-	free(c);
+	moves = ft_itoa(g->moves);
+	mlx_string_put(g->mlx_ptr, g->win, 3, 11, 255, moves);
+	free(moves);
 	return (0);
 }
 
@@ -59,9 +61,9 @@ void	draw_tile(t_game *g, int i, int j)
 		mlx_put_image_to_window(g->mlx_ptr, g->win, g->tiles[3], x, y);
 	else if (g->map[j][i] == '1')
 		mlx_put_image_to_window(g->mlx_ptr, g->win, g->tiles[4], x, y);
-	else if (g->map[j][i] == 'P' && g->state < 0)
+	else if (g->map[j][i] == 'P' && g->player_state < 0)
 		mlx_put_image_to_window(g->mlx_ptr, g->win, g->tiles[0], x, y);
-	else if (g->map[j][i] == 'P' && g->state > 0)
+	else if (g->map[j][i] == 'P' && g->player_state > 0)
 		mlx_put_image_to_window(g->mlx_ptr, g->win, g->tiles[1], x, y);
 	else if (g->map[j][i] == 'E')
 		mlx_put_image_to_window(g->mlx_ptr, g->win, g->tiles[5], x, y);

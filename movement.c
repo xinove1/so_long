@@ -14,13 +14,13 @@
 
 int	handle_keys(int code, t_game *game)
 {
-	if (code == KEY_A || code == KEY_LEFT)
+	if (code == KEY_A || code == KEY_LEFT || code == KEY_H)
 		move(game, (t_Vector2){-1, 0});
-	else if (code == KEY_D || code == KEY_RIGHT)
+	else if (code == KEY_D || code == KEY_RIGHT || code == KEY_L)
 		move(game, (t_Vector2){1, 0});
-	else if (code == KEY_W || code == KEY_UP)
+	else if (code == KEY_W || code == KEY_UP || code == KEY_K)
 		move(game, (t_Vector2){0, -1});
-	else if (code == KEY_S || code == KEY_DOWN)
+	else if (code == KEY_S || code == KEY_DOWN || code == KEY_J)
 		move(game, (t_Vector2){0, 1});
 	else if (code == KEY_ESC)
 		exit_game(game);
@@ -50,8 +50,7 @@ void	move(t_game *game, t_Vector2 dir)
 		i++;
 	}
 	game->moves++;
-	game->state = -game->state;
-	new_pos++;
+	game->player_state = -game->player_state;
 	draw(game);
 }
 

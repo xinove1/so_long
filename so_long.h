@@ -21,6 +21,10 @@
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_W 119
+# define KEY_H 104
+# define KEY_J 106
+# define KEY_K 107
+# define KEY_L 108
 # define KEY_LEFT 65361
 # define KEY_DOWN 65364
 # define KEY_RIGHT 65363
@@ -46,7 +50,7 @@ typedef struct s_game
 	void		*win;
 	t_Vector2	win_size;
 	void		*tiles[7];
-	int			state;
+	int			player_state;
 }				t_game;
 
 void		clean_map(char **map);

@@ -16,9 +16,9 @@ void	parse_map(t_game *game, char *map_path)
 {
 	game->map_size = get_map_size(map_path, game);
 	get_map(game, map_path);
+	check_walls(game);
 	parse_inner_map(game);
 	parse_players_position(game);
-	check_walls(game);
 }
 
 void	parse_inner_map(t_game *game)
@@ -27,7 +27,6 @@ void	parse_inner_map(t_game *game)
 	int	y;
 	int	exits;
 
-	x = 1;
 	y = 1;
 	exits = 0;
 	while (y < game->map_size.y - 1)
@@ -41,6 +40,8 @@ void	parse_inner_map(t_game *game)
 				game->players++;
 			else if (game->map[y][x] == 'E')
 				exits++;
+			else if (game->map[y][x] != '0' && game->map[y][x] != '1')
+				parser_error_handler(8, game, NULL);
 			x++;
 		}
 		y++;
